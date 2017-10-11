@@ -5,5 +5,5 @@ if ActiveRecord::Migrator.needs_migration?
 end
 
 run ApplicationController
-use UsersController
-use CampingTripsController
+use UserController
+use CampingtripController

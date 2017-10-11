@@ -1,2 +1,2 @@
-class CampingtripController < Sinatra::Base
+class CampingtripController < ApplicationController
 end

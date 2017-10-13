@@ -8,5 +8,9 @@ class CampingtripController < ApplicationController
     end
   end
 
-
+  post '/campingtrip/new' do
+    @campingtrip = CampingTrip.create(params)
+    @campingtrip.save
+    redirect to "/user/#{@campground.id}"
+  end
 end

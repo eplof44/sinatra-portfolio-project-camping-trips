@@ -1,3 +1,6 @@
+require 'sinatra/flash'
+
+
 class UserController < ApplicationController
 
   get '/signup' do
@@ -38,17 +41,8 @@ class UserController < ApplicationController
 
   get '/logout' do
     session.destroy
-    redirect to '/login'
+    redirect to '/'
   end
-
-  # get '/users/:slug' do
-  #   @user = User.find_by_slug(params[:slug])
-  #   if current_user == @user
-  #     erb :'/users/show'
-  #   else
-  #     redirect to "/users/#{current_user.slug}"
-  #   end
-  # end
 
   get '/users/:slug' do
     @user = User.find_by_slug(params[:slug])

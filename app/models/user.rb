@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   has_secure_password
-  has_many :campingtrip
+  has_many :campingtrips
 
 
   def self.find_by_slug(slug)

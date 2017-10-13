@@ -10,9 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171011003423) do
+ActiveRecord::Schema.define(version: 20171013004215) do
 
-  create_table "campingtrip", force: :cascade do |t|
+  create_table "campingtrips", force: :cascade do |t|
     t.string "park_name"
     t.string "state"
     t.integer "site_number"

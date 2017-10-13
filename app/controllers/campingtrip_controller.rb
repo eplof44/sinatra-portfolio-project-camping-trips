@@ -1,6 +1,6 @@
 class CampingtripController < ApplicationController
 
-  get '/campingtrip/new' do
+  get '/campingtrip/create_trip' do
     if session[:user_id]
       erb :'/campingtrip/create_trip'
     else
@@ -8,7 +8,7 @@ class CampingtripController < ApplicationController
     end
   end
 
-  post '/campingtrip/new' do
+  post '/campingtrip/create_trip' do
     @campingtrip = CampingTrip.create(params)
     @campingtrip.save
     redirect to "/user/#{@campground.id}"

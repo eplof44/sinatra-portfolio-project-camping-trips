@@ -2,18 +2,18 @@
 
 <form method="POST" action="/campingtrip/<%= @campingtrip.id %>">
   <input id="hidden" type="hidden" name="_method" value="PATCH">
-  <h4>Park Name: <input type="text" name="park_name" id="park_name"></input></h4>
-  <h4>Park State:<input type="text" name="state" id="state"></input></h4>
-  <h4>Site Number:<input type="text" name="site_number" id="site_number"></input></h4>
-  <h4>Was there a fire pit? <input type="text" name="firepit" id="firepit"></input></h4>
-  <h4>Was the site waterfront?<input type="text" name="waterfront" id="waterfront"></input></h4>
-  <h4>Was it shaded?<input type="text" name="shaded" id="shaded"></input></h4>
-  <h4>Is it dog friendly? <input type="text" name="dog_friendly" id="dog_friendly"></input></h4>
-  <h4>Do they also have cabins?<input type="text" name="cabins" id="cabins"></input></h4>
-  <h4>Is it a pit or flush toilet?<input type="text" name="toilet_type" id="toilet_type"></input></h4>
-  <h4>What are the other good sites you've checked out?<input type="text" name="other_good_sites" id="other_good_sites"></input></h4>
-  <h4>Is there a water pump?<input type="text" name="waterpump" id="waterpump"></input></h4>
-  <h4>Is the water tasty? <input type="text" name="water_taste" id="water_taste"></input></h4>
-  <h4> Please give more detail:<textarea name="added_notes" id="added_notes"></textarea></h4>
-  <h4> <input type="submit" value="Create New Trip">
+  <h4>Park Name: <input type="text" name="park_name" value="<%= @campingtrip.park_name%>"></input></h4>
+  <h4>Park State:<input type="text" name="state" value="<%= @campingtrip.state%>"></input></h4>
+  <h4>Site Number:<input type="text" name="site_number" value="<%= @campingtrip.site_number%>"></input></h4>
+  <h4>Was there a fire pit? <input type="text" name="firepit" value="<%= @campingtrip.firepit%>"></input></h4>
+  <h4>Was the site waterfront?<input type="text" name="waterfront" value="<%= @campingtrip.waterfront%>"></input></h4>
+  <h4>Was it shaded?<input type="text" name="shaded" value="<%= @campingtrip.shaded%>"></input></h4>
+  <h4>Is it dog friendly? <input type="text" name="dog_friendly" value="<%= @campingtrip.dog_friendly%>"></input></h4>
+  <h4>Do they also have cabins?<input type="text" name="cabins" value="<%= @campingtrip.cabins%>"></input></h4>
+  <h4>Is it a pit or flush toilet?<input type="text" name="toilet_type" value="<%= @campingtrip.toilet_type%>"></input></h4>
+  <h4>What are the other good sites you've checked out?<input type="text" name="other_good_sites" value="<%= @campingtrip.other_good_sites%>"></input></h4>
+  <h4>Is there a water pump?<input type="text" name="waterpump" value="<%= @campingtrip.waterpump%>"></input></h4>
+  <h4>Is the water tasty? <input type="text" name="water_taste" value="<%= @campingtrip.water_taste%>"></input></h4>
+  <h4> Please give more detail:<textarea name="added_notes" value="<%= @campingtrip.added_notes%>"></textarea></h4>
+  <h4> <input type="submit" value="Update Trip">
 </form>

@@ -35,5 +35,45 @@ post '/campingtrip/create_trip' do
       end
     end
 
+    patch '/campingtrip/:id' do
+       authenticate_user
+       @campingtrip = Campingtrip.find(params[:id])
+       if !params[:campingtrip][:site_name].empty?
+         # only update the name if the field isn't empty
+         @campingtrip.park_name = params[:campingtrip][:park_name]
+         @collection.save
+       end
+
+       redirect to "/campingtrip/#{@campingtrip.id}"
+     end
+
+     get '/campingtrip/:id/edit' do
+       authenticate_user
+       @campingtrip = Campingtrip.find(params[:id])
+       if current_user.campingtrip_ids.include?(@campingtrip.id)
+         session[:campingtrip] = @campingtrip.id
+         erb :'/campingtrip/edit_trip'
+       else
+         flash[:message] = "Error: You cannot edit another user's collection"
+         redirect to "/users/#{current_user.slug}"
+       end
+     end
+
+     delete '/campingtrip/:id/delete' do
+       authenticate_user
+       @campingtrip= Campingtrip.find(params[:id])
+       if user_collection_valid?
+         @campingtrip.destroy
+         flash[:message] = "Camping Trip Deleted"
+         redirect to "/users/#{current_user.slug}"
+       else
+         flash[:message] = "Error: You cannot edit another user's trip"
+         redirect to "/users/#{current_user.slug}"
+       end
+     end
+
+
+
+
 
 end

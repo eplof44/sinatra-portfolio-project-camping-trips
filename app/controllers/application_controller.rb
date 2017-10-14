@@ -23,5 +23,12 @@ class ApplicationController < Sinatra::Base
       !!session[:user_id]
     end
   end
+  
+  def authenticate_user
+    if !logged_in?
+      flash[:message] = "Error: You must be logged in to do that"
+      redirect to "/login"
+    end
+  end
 
 end

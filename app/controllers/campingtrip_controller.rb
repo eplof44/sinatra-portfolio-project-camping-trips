@@ -1,5 +1,20 @@
 class CampingtripController < ApplicationController
 
+
+    get '/trips' do
+      if logged_in?
+        @user = User.find(session[:user_id])
+        erb :'campingtrip/trips'
+      else
+        # flash[:message] = 'Please log in first.'
+        redirect to '/login'
+      end
+  end
+
+
+
+
+
   get '/campingtrip/create_trip' do
     authenticate_user
     if session[:user_id]
@@ -17,7 +32,7 @@ post '/campingtrip/create_trip' do
  waterpump: params[:waterpump], water_taste: params[:water_taste], added_notes: params[:added_notes])
  if @campingtrip.save && !current_user.campingtrips.include?(@campingtrip.park_name)
         current_user.campingtrips << @campingtrip
-        flash[:message] = "Successfully created trip"
+        # flash[:message] = "Successfully created trip"
         redirect to "/campingtrip/#{@campingtrip.id}"
       else
         redirect to '/campingtrip/create_trip'
@@ -30,7 +45,7 @@ post '/campingtrip/create_trip' do
         session[:campingtrip] = @campingtrip.id
         erb :'/campingtrip/show_trips'
       else
-        flash[:message] = "Error: You cannot view another user's collection"
+        # flash[:message] = "Error: You cannot view another user's collection"
         redirect to "/users/#{current_user.slug}"
       end
     end
@@ -53,7 +68,7 @@ post '/campingtrip/create_trip' do
          session[:campingtrip] = @campingtrip.id
          erb :'/campingtrip/edit_trip'
        else
-         flash[:message] = "Error: You cannot edit another user's trips"
+        #  flash[:message] = "Error: You cannot edit another user's trips"
          redirect to "/users/#{current_user.slug}"
        end
      end
@@ -63,10 +78,10 @@ post '/campingtrip/create_trip' do
        @campingtrip= Campingtrip.find(params[:id])
        if user_collection_valid?
          @campingtrip.destroy
-         flash[:message] = "Camping Trip Deleted"
+        #  flash[:message] = "Camping Trip Deleted"
          redirect to "/users/#{current_user.slug}"
        else
-         flash[:message] = "Error: You cannot delete another user's trip"
+        #  flash[:message] = "Error: You cannot delete another user's trip"
          redirect to "/users/#{current_user.slug}"
        end
      end

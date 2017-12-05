@@ -17,7 +17,7 @@ post '/campingtrip/create_trip' do
  waterpump: params[:waterpump], water_taste: params[:water_taste], added_notes: params[:added_notes])
  if @campingtrip.save && !current_user.campingtrips.include?(@campingtrip.park_name)
         current_user.campingtrips << @campingtrip
-        # flash[:message] = "Successfully created trip"
+        flash[:message] = "Successfully created trip"
         redirect to "/campingtrip/#{@campingtrip.id}"
       else
         redirect to '/campingtrip/create_trip'
@@ -39,7 +39,6 @@ post '/campingtrip/create_trip' do
        authenticate_user
        @campingtrip = Campingtrip.find(params[:id])
        if !params[:campingtrip][:site_name].empty?
-         # only update the name if the field isn't empty
          @campingtrip.park_name = params[:campingtrip][:park_name]
          @collection.save
        end
@@ -54,7 +53,7 @@ post '/campingtrip/create_trip' do
          session[:campingtrip] = @campingtrip.id
          erb :'/campingtrip/edit_trip'
        else
-         flash[:message] = "Error: You cannot edit another user's collection"
+         flash[:message] = "Error: You cannot edit another user's trips"
          redirect to "/users/#{current_user.slug}"
        end
      end
@@ -67,7 +66,7 @@ post '/campingtrip/create_trip' do
          flash[:message] = "Camping Trip Deleted"
          redirect to "/users/#{current_user.slug}"
        else
-         flash[:message] = "Error: You cannot edit another user's trip"
+         flash[:message] = "Error: You cannot delete another user's trip"
          redirect to "/users/#{current_user.slug}"
        end
      end

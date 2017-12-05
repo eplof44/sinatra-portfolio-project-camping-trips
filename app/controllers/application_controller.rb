@@ -1,6 +1,5 @@
 require './config/environment'
-require 'sinatra/flash'
-
+require 'sinatra-flash'
 
 class ApplicationController < Sinatra::Base
   configure do
@@ -23,7 +22,7 @@ class ApplicationController < Sinatra::Base
       !!session[:user_id]
     end
   end
-  
+
   def authenticate_user
     if !logged_in?
       flash[:message] = "Error: You must be logged in to do that"

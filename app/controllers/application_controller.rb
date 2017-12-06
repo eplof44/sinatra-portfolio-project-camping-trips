@@ -1,5 +1,4 @@
 require './config/environment'
-require 'sinatra-flash'
 
 class ApplicationController < Sinatra::Base
   configure do
@@ -7,8 +6,6 @@ class ApplicationController < Sinatra::Base
     set :views, 'app/views'
     enable :sessions
     set :session_secret, "secret"
-    use Rack::Flash
-
   end
 
   get "/" do
@@ -27,7 +24,6 @@ class ApplicationController < Sinatra::Base
 
   def authenticate_user
     if !logged_in?
-      flash[:message] = "Error: You must be logged in to do that"
       redirect to "/login"
     end
   end

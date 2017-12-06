@@ -1,6 +1,6 @@
 <h3>Here are your camping trips <%= current_user.username %></h3>
 
 <% @campingtrip.each do |trip|%>
-   <a href="/dreams/<%= campingrip.id %>">
+   <a href="/campingtrip/<%= campingtrip.id %>">
    <%= campingtrip.park_name %> <br>
    <% end %>

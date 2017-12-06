@@ -4,6 +4,7 @@ class CampingtripController < ApplicationController
     get '/trips' do
       if logged_in?
         @user = User.find(session[:user_id])
+        @campingtrip = Campingtrip.all
         erb :'campingtrip/trips'
       else
         redirect to '/login'

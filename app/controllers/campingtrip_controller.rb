@@ -29,7 +29,7 @@ class CampingtripController < ApplicationController
   get '/trips' do
     if logged_in?
      @user = current_user
-     @campingtrip = Campingtrip.all
+     @campingtrips = Campingtrip.all
      erb :'/campingtrip/trips'
     else
      redirect "/login"
@@ -45,14 +45,24 @@ class CampingtripController < ApplicationController
      end
   end
 
-  post '/campingtrip/:id/edit' do
-   @campingtrip = Campingtrip.find(params[:id])
-   if logged_in? && @campingtrip.user_id == current_user.id
-    erb :'campingtrip/edit_trip'
-   else
-    redirect "/login"
-   end
-  end
+  get '/campingtrip/:id/edit' do
+         @campingtrip = Campingtrip.find(params[:id])
+         if logged_in? && @campingtrip.user_id == current_user.id
+           session[:campingtrip] = @campingtrip.id
+           erb :'/campingtrip/edit_trip'
+         else
+           redirect to "/users/#{current_user.slug}"
+         end
+       end
+
+  # post '/campingtrip/:id/edit' do
+  #  @campingtrip = Campingtrip.find(params[:id])
+  #  if logged_in? && @campingtrip.user_id == current_user.id
+  #   erb :'campingtrip/edit_trip'
+  #  else
+  #   redirect "/login"
+  #  end
+  # end
 
   patch '/campingtrip/:id' do
     @campingtrip = Campingtrip.find(params[:id])

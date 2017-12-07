@@ -45,9 +45,38 @@ class CampingtripController < ApplicationController
      end
   end
 
+  post '/campingtrip/:id/edit' do
+   @campingtrip = Campingtrip.find(params[:id])
+   if logged_in? && @campingtrip.user_id == current_user.id
+    erb :'campingtrip/edit_trip'
+   else
+    redirect "/login"
+   end
+  end
 
+  patch '/campingtrip/:id' do
+    @campingtrip = Campingtrip.find(params[:id])
+     if params[:park_name] == ""
+      redirect "/campingtrip/#{params[:id]}/edit"
+     else
+      @campingtrip.update(park_name: params[:park_name], state: params[:state], site_number: params[:site_number],
+      firepit: params[:firepit], waterfront: params[:waterfront], shaded: params[:shaded], dog_friendly: params[:dog_friendly],
+      cabins: params[:cabins], toilet_type: params[:toilet_type], other_good_sites: params[:other_good_sites],
+      waterpump: params[:waterpump], water_taste: params[:water_taste], added_notes: params[:added_notes])
+      redirect "/campingtrip/#{params[:id]}"
+     end
+  end
 
-
+  delete '/campingtrip/:id/delete' do
+    @campingtrip = Campingtrip.find(params[:id])
+    @user = current_user
+    if logged_in? && @campingtrip.user_id == @user.id
+     @campingtrip.delete
+     erb :'/campingtrip/delete'
+    else
+     redirect "/login"
+    end
+  end
 
 
 

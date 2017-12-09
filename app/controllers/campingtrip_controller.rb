@@ -27,13 +27,14 @@ class CampingtripController < ApplicationController
   end
 
   get '/trips' do
-    if logged_in?
-     @user = current_user
-     @campingtrips = Campingtrip.all
-     erb :'/campingtrip/trips'
-    else
-     redirect "/login"
-    end
+  if logged_in? && @campingtrip.user_id == current_user.id
+  session[:campingtrip] = @campingtrip.id
+  @campingtrips = Campingtrip.all
+ erb :'/campingtrip/trips'
+  else
+  redirect "/login"
+  end
+
   end
 
   get '/campingtrip/:id'do
